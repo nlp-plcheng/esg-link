@@ -6,7 +6,13 @@
    <a id="go" href="https://office-skating-cashiers-accessories.trycloudflare.com/">沒有自動跳轉的話請點這裡</a></p>
 <script>
   // Forward to the platform, keeping the personal code (?pid=...) intact.
+  // ?go=/some/path (a path on the platform, e.g. a report PDF with #page=N,
+  // percent-encoded) forwards to that path instead of the front page, so a
+  // link to a page inside the platform can be written once and survive a
+  // change of tunnel address. Only a plain absolute path is accepted.
   var target = "https://office-skating-cashiers-accessories.trycloudflare.com/" + location.search + location.hash;
+  var go = new URLSearchParams(location.search).get("go");
+  if (go && /^\/(?![\/\\])/.test(go)) target = "https://office-skating-cashiers-accessories.trycloudflare.com" + go;
   document.getElementById("go").href = target;
   location.replace(target);
 </script>
